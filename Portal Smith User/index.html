@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Smith</title>
+
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/forms.css">
+    <link rel="stylesheet" href="./styles/mediaQuery.css">
+</head>
+<body>
+    <!--Set as factured Form------------------------------>
+    <!---------------------------------------------------->
+    <div class="setAsFacturedFormHolder notShowed">
+        <h1 class="mainTitleEdit">Marcar como facturado</h1>
+        <br>
+        <button class="exitFacturedButton">X</button>
+        <form class="setAsFacturedForm">
+            <div class="noFlex">
+                <div class="flexColumn">
+                    <label for="">Fecha: </label>
+                    <label for="date" id="reportDateEdit">00-00-0000</label>
+                </div>
+                <div class="flexColumn">
+                    <label for="reportId">N. Reporte</label>
+                    <input type="text" id="reportIdEdit" placeholder="R-XXXXXX" maxlength="8" disabled="disabled">
+                </div>
+            </div>
+            <div class="uploadoFactureInput">
+                <label for="uploadFacturePDF">PDF: </label>
+                <input type="file" id="uploadFacturePDF">
+                <label for="uploadFactureXML">XML: </label>
+                <input type="file" id="uploadFactureXML">
+            </div>
+            <br>
+        </form>
+        <button class="setAsFactureSender">Marcar como facturado</button>
+    </div>
+    <!--Edit Form----------------------------------------->
+    <!---------------------------------------------------->
+    <div class="editFormHolder">
+        <h1 class="mainTitleEdit">Editar Reporte</h1>
+        <br>
+        <button class="exitEditButton">X</button>
+        <form id="reportFormEdit">
+            <div class="mainDataHolderEdit">
+                <div>
+                    <label for="">Fecha: </label>
+                    <label for="date" id="reportDateEdit">00-00-0000</label>
+                </div>
+                <div>
+                    <label for="reportId">N. Reporte</label>
+                    <input type="text" id="reportIdEdit" placeholder="R-XXXXXX" maxlength="8">
+                </div>
+            </div>
+            <label for="reportTechnicianEdit">Técnico</label>
+            <select name="reportTechnicianEdit" id="reportTechnicianEdit">
+                <option value=""></option>
+                <option value="Ivan Asael Romero Gonzales">Ivan Asael Romero Gonzales</option>
+                <option value="Pedro Perez Santiago">Pedro Perez Santiago</option>
+                <option value="Kevin Fernando Garcia Cedeño">Kevin Fernando Garcia Cedeño</option>
+                <option value="Geronimo Lucio Ramirez">Geronimo Lucio Ramirez</option>
+            </select>
+            <!---->
+            <label for="reportEquipmentEdit">Equipo</label>
+            <input type="text" name="reportEquipmentId" id="reportEquipmentId" placeholder="Nombre del Equipo">
+            <!---->
+            <label for="reportLocationEdit">Locación</label>
+            <select name="reportLocationEdit" id="reportLocationEdit">
+                <option value="TH: Fashion Drive">TH: Fashion Drive</option>
+                <option value="TH: Arboledas">TH: Arboledas</option>
+                <option value="TH: VPH">TH: VPH</option>
+                <option value="TH: UDEM CCU">TH: UDEM CCU</option>
+                <option value="TH: La Fe">TH: La Fe</option>
+                <option value="TH: Magma">TH: Magma</option>
+                <option value="TH: Office Park">TH: Office Park</option>
+                <option value="TH: Av. México">TH: Av. México</option>
+                <option value="TH: Altea Misiones">TH: Altea Misiones</option>
+                <option value="TH: Las Puentes">TH: Las Puentes</option>
+                <option value="TH: Micropolis">TH: Micropolis</option>
+                <option value="TH: Parque Centro">TH: Parque Centro</option>
+                <option value="TH: Altea Miguel Alemán">TH: Altea Miguel Alemán</option>
+                <option value="TH: Altea Huinalá">TH: Altea Huinalá</option>
+                <option value="TH: Distrito V">TH: Distrito V</option>
+                <option value="TH: Altea Pletórico">TH: Altea Pletórico</option>
+                <option value="TH: Mol Concordia">TH: Mol Concordia</option>
+                <option value="TH: Chapultepec">TH: Chapultepec</option>
+                <option value="TH: Arcadia Guadalupe">TH: Arcadia Guadalupe</option>
+                <option value="TH: Garza Sada">TH: Garza Sada</option>
+                <option value="TH: Nuevo Anáhuac">TH: Nuevo Anáhuac</option>
+                <option value="TH: Colón Metro">TH: Colón Metro</option>
+                <option value="TH: Animol">TH: Animol</option>
+                <option value="TH: Tec Biblioteca">TH: Tec Biblioteca</option>
+                <option value="TH: San Jerónimo">TH: San Jerónimo</option>
+                <option value="TH: Nuevo Sur">TH: Nuevo Sur</option>
+                <option value="TH: Top Obispado">TH: Top Obispado</option>
+                <option value="TH: Punto Poniente">TH: Punto Poniente</option>
+                <option value="TH: Carranza">TH: Carranza</option>
+                <option value="TH: Constitución">TH: Constitución</option>
+                <option value="TH: Miguel de la Madrid">TH: Miguel de la Madrid</option>
+                <option value="TH: Ayutla">TH: Ayutla</option>
+                <option value="TH: Venustiano Sur">TH: Venustiano Sur</option>
+                <option value="TH: Nogalar">TH: Nogalar</option>
+                <option value="TH: Paseo Villalta">TH: Paseo Villalta</option>
+                <option value="TH: Pablo Livas">TH: Pablo Livas</option>
+                <option value="TH: Ricardo Margain">TH: Ricardo Margain</option>
+                <option value="TH: Central de Autobuses">TH: Central de Autobuses</option>
+                <option value="TH: Calzada del Valle">TH: Calzada del Valle</option>
+                <option value="TH: Forum Leones">TH: Forum Leones</option>
+                <option value="TH: Sultanes">TH: Sultanes</option>
+            </select>
+            <!---->
+            <label for="reportStatusEdit">Estado</label>
+            <select name="reportStatusEdit" id="reportStatusEdit">
+                <option value="0 Pendiente">Pendiente</option>
+                <option value="1 Revisado">Revisado</option>
+                <option value="2 Listo">Listo</option>
+                <option value="3 Facturado">Facturado</option>
+            </select>
+            <!---->
+            <label for="reportDescriptionEdit">Descripcion</label>
+            <textarea name="reportDescriptionEdit" id="reportDescriptionEdit" cols="10" rows="5" placeholder="Descripcion del equipo"></textarea>
+            <!---->
+            <label for="reportAuthEdit">Firmado por: </label>
+            <input name="reportAuthEdit" type="text" id="reportAuthEdit" placeholder="Nombre del encargado">
+        </form>
+        <br>
+        <button type="submit" id="reportSenderEdit">Editar Reporte</button>
+    </div>
+    <!--Set as ready-------------------------------------->
+    <!---------------------------------------------------->
+    <div class="setAsReadyFormHolder visible">
+        <h1>Marcar como</h1>
+        <br>
+        <form id="setAsReadyForm">
+            <label for="setAsSelect">Marcar como: </label>
+            <select name="setAsSelect" id="setAsSelect">
+                <option value="0 Pendiente">Pendiente</option>
+                <option value="1 Revisado">Revisado</option>
+                <option value="2 Listo">Listo</option>
+            </select>
+
+            <label for="setAsBy">Marcado por: </label>
+            <select name="setAsBy" id="setAsBy">
+                <option value="Ivan Asael Romero Gonzales">Ivan Asael Romero Gonzales</option>
+                <option value="Pedro Perez Santiago">Pedro Perez Santiago</option>
+                <option value="Kevin Fernando Garcia Cedeño">Kevin Fernando Garcia Cedeño</option>
+                <option value="Geronimo Lucio Ramirez">Geronimo Lucio Ramirez</option>
+            </select>
+
+            <label for="setAsComentary">Añadir un comentario: </label>
+            <textarea name="setAsComentary" id="setAsComentary" cols="30" rows="10"></textarea>
+
+            <label for="singedBy">Firmado por: </label>
+            <input type="text" id="singedBy">
+            <br>
+        </form>
+
+        <div>
+            <button class="setAsButtonSender">Aceptar</button>
+        </div>
+        <button class="closeSetAsForm">X</button>
+    </div>
+    <!--Edit Form----------------------------------------->
+    <!---------------------------------------------------->
+    <h1 class="mainTitleHeader">Usuario</h1>
+    <main>
+        <section class="reportDivision">
+            <h3>Reportes</h3>
+            <div class="filterSection">
+                <div class="filterHolders">
+                    <div>
+                        <label for="filterSelection">Filtrar por</label>
+                        <select name="filterSelection" id="filterSelection">
+                            <option value="day">Dia</option>
+                            <option value="month">Mes</option>
+                            <option value="location">Sucursal</option>
+                            <option value="zone">Zona</option>
+                            <option value="technician">Tecnico</option>
+                        </select>
+                    </div>
+                    <!---->
+                    <div class="filterContainer">
+                        <label for="FilteredSEesctionHolder">
+                        </label>
+
+                        <label for="filterDate">Fecha</label>
+                        <input id="filterDateInput" type="date">
+                    </div>
+                </div>
+                <div>
+                    <button class="setFiltersButton">Buscar</button>
+                    <button class="deleteFilterButton">X</button>
+                </div>
+            </div>
+            <div class="reportSection">
+                <div class="reportsHolder">
+                </div>
+                <center><button class="showMoreButton">Mostrar Mas</button></center>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="./editPanel.js"></script>
+    <script type="module" src="./main.js"></script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root{
+    --lightGray: #000000c7;
+    --lightGrayLine: #0000004f;
+    --smithBlue: #4f77c0;
+    --lightBlue: #eaf3ff;
+
+    --lightRed: #ffd6d6;
+    --smithRed: #f86969;
+    --lightYellow: rgb(255, 244, 215);
+    --smithYellow: #bd8621;
+    --lightGreen: #E1F9E3;
+    --smithGreen: #259930;
+
+    --smithWhite: rgb(255, 255, 255);
+    --smithLightBlack: rgb(50, 50, 50);
+    --smithBack: #f5f5f5;
+
+    --smithBlueForm: #717172;
+    --smithCyanForm: #f3f4f7;
+
+    --blueOrangade: #eb887b;
+}
+h1, h2, h3, h4, h5, h6, p, a, label{
+    padding: 0;
+    margin: 0;  
+    font-family: 'Roboto', sans-serif;
+    color: var(--smithLightBlack);
+}
+p{
+    font-weight: 400;
+}
+h4{
+    font-weight: 400;
+}
+label{
+    font-weight: 400;
+}
+html, body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    height: 100%;
+}
+body{
+    background-color: var(--smithWhite);
+}
+
+section{
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+}
+.reportDivision{
+    width: 75%;
+}
+main{
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+
+    height: 90%;
+    grid-gap: 10px;
+    padding: 10px;
+}
+.reportSection{
+    border: transparent;
+    border-radius: 5px;
+
+    overflow: auto;
+    overflow-y: scroll;
+}
+
+/**/
+.mainData{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#reportForm{
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+}
+
+/*FORM*/
+label, input, select, textarea, button{
+    font-size: 1rem;
+    font-family: "Roboto", sans-serif;
+}
+input, select, textarea{
+    padding: 5px;
+    margin: 2px 0;
+
+    border-radius: 5px;
+    border: 1px solid black;
+}
+textarea{
+    resize: none;
+}
+button{
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+/*CARD*/
+.reportsHolder{
+    display: flex;
+    grid-gap: 10px;
+    padding: 5px;
+
+    display: flex;
+    flex-direction: column;
+    width: 96%;
+}
+.report{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: transparent;
+    box-shadow: var(--lightGray) 0 0 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.reportMainData{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 15px;
+
+    width: 100%;
+    padding: 5px;
+    padding-bottom: 10px;
+}
+.reportMainData > h4{
+    border: 2px solid var(--smithBlue);
+    background-color: var(--lightBlue);
+    padding: 5px 7px;
+    border-radius: 10px;
+
+    box-shadow: var(--lightBlue) 0 0 10px;
+}
+.divisionBar{
+    width: 100%;
+    height: 1px;
+    background-color: var(--lightGrayLine);
+}
+.reportDescription{
+    padding: 5px;
+    padding-top: 10px;
+    
+    width: 100%;
+}
+.reportsButtons{
+    padding: 5px;
+    padding-top: 10px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+.readyButton{
+    transition: 0.5s;
+    border: 2px solid var(--smithBlue);
+    background-color: var(--lightBlue);
+    padding: 5px 7px;
+    border-radius: 10px;
+}
+.readyButton:hover{
+    transition: 0.5s;
+    background-color: var(--smithGreen);
+    color: var(--smithWhite);
+}
+.reportTextStatus{
+    border: 2px solid var(--smithBlue);
+    background-color: var(--lightBlue);
+    padding: 5px 7px;
+    border-radius: 10px;
+}
+.BlueButtons{
+    transition: 0.5s;
+    border: 2px solid var(--smithBlue);
+    background-color: var(--lightBlue);
+    padding: 5px 7px;
+    border-radius: 10px;
+}
+.BlueButtons:hover{
+    transition: 0.5s;
+    background-color: var(--smithBlue);
+
+    color: var(--smithWhite);
+}
+.RedButtons{
+    transition: 0.5s;
+    border: 2px solid var(--smithRed);
+    background-color: var(--lightRed);
+    padding: 5px 7px;
+    border-radius: 10px;
+}
+.RedButtons:hover{
+    transition: 0.5s;
+    background-color: var(--smithRed);
+    color: var(--smithWhite);
+}
+.Pendiente{
+    border: 2px solid var(--smithRed);
+    background-color: var(--lightRed);
+}
+.Revisado{
+    border: 2px solid var(--smithYellow);
+    background-color: var(--lightYellow);
+}
+.Listo{
+    border: 2px solid var(--smithGreen);
+    background-color: var(--lightGreen);
+}
+.technicianData{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+/*Filter Section*/
+.filterSection{
+    display: flex;
+    align-items: center;
+}
+.filterContainer{
+    padding: 0 5px 0 15px;
+}
+
+
+/*Edit form styled*/
+.editFormHolder{
+    background-color: white;
+    position: absolute;
+
+    height: 100%;
+    width: 100%;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#reportFormEdit{
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+}
+.mainDataHolderEdit{
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+}
+.exitEditButton{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.mainTitleEdit{
+    text-align: left;
+}
+.showMoreButton{
+    transition: 0.3s;
+    border-radius: 10px;
+    border: 2px solid var(--smithBlueForm);
+    font-weight: 400;
+}
+.showMoreButton:hover{
+    outline: none;
+    transition: 0.3s;
+    border-radius: 5px;
+
+    background-color: var(--smithBlueForm);
+    color: white;
+}
+.mainTitleHeader{
+    padding-left: 10px;
+}
+/*Set As Ready Section*/
+.setAsReadyFormHolder{
+    display: none;
+    position: fixed;
+    background-color: white;
+    flex-direction: column;
+
+    height: 100%;
+    width: 100%;
+
+    align-items: center;
+    justify-content: center;
+}
+#setAsReadyForm{
+    display: flex;
+    flex-direction: column;
+}
+.setAsButtonSender{
+    transition: 0.5s;
+    border: 2px solid var(--smithGreen);
+    background-color: var(--lightGreen);
+    padding: 5px 7px;
+    border-radius: 10px;
+}
+.setAsButtonSender:hover{
+    transition: 0.5s;
+    background-color: var(--smithGreen);
+    color: var(--smithWhite);
+}
+.closeSetAsForm{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.facturedButton{
+    transition: 0.5s;
+    border: 2px solid var(--smithBlueForm);
+    background-color: var(--smithBack);
+    padding: 5px 7px;
+    border-radius: 10px;
+}
+.facturedButton:hover{
+    transition: 0.5s;
+    border: 2px solid var(--smithBlueForm);
+    background-color: var(--smithBlueForm);
+    padding: 5px 7px;
+    border-radius: 10px;
+    color: white;
+}
+.factureLink{
+    color: blue;
+}
+.factureLink > P{
+    color: blue;
+}
+/*SET AS FACTURE HOLDER* -------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------*/
+.setAsFacturedFormHolder{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.noFlex{
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: space-between;
+}
+.uploadoFactureInput{
+    display: flex;
+    flex-direction: column;
+}
+.setAsFacturedButton{
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+}
+.flexColumn{
+    display: flex;
+    flex-direction: column;
+}
+.exitFacturedButton{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    transition: 0.3s;
+    border-radius: 10px;
+    border: 2px solid var(--blueOrangade);
+    font-weight: 400;
+
+    color: var(--blueOrangade);
+    width: 35px;
+}
+.exitFacturedButton:hover{
+    transition: 0.3s;
+    border-radius: 5px;
+    border: 2px solid var(--blueOrangade);
+    font-weight: 400;
+
+    color: white;
+    background-color: var(--blueOrangade);
+}
+.setAsFactureSender{
+    transition: 0.5s;
+    border: 2px solid var(--smithBlueForm);
+    background-color: var(--smithBack);
+    padding: 5px 7px;
+    border-radius: 10px;
+}
+.setAsFactureSender:hover{
+    transition: 0.5s;
+    border: 2px solid var(--smithBlueForm);
+    background-color: var(--smithBlueForm);
+    padding: 5px 7px;
+    border-radius: 10px;
+    color: white;
+}
+.downloadLink{
+    color: blue;
+}
+#setAsReadyForm{
+    width: 80%;
+}

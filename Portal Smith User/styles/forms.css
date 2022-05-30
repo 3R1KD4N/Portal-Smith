@@ -1,0 +1,130 @@
+:root{
+    --lightGray: #000000c7;
+    --lightGrayLine: #0000004f;
+    --smithBlue: #4f77c0;
+    --lightBlue: #eaf3ff;
+
+    --lightRed: #ffd6d6;
+    --smithRed: #f86969;
+    --lightYellow: rgb(255, 244, 215);
+    --smithYellow: #bd8621;
+    --lightGreen: #E1F9E3;
+    --smithGreen: #38cc47;
+
+    --smithWhite: rgb(255, 255, 255);
+    --smithLightBlack: rgb(50, 50, 50);
+    --smithBack: #f5f5f5;
+
+    --smithBlueForm: #717172;
+    --smithCyanForm: #f3f4f7;
+
+    --blueOrangade: #eb887b;
+}
+
+select{
+    transition: 0.5s;
+    border: 1px solid var(--smithBlueForm);
+}
+select:focus{
+    border: 1px solid var(--smithBlueForm);
+    transition: 0.5s;
+    outline-color: var(--smithBlueForm);
+    background-color: var(--smithCyanForm);
+}
+input{
+    transition: 0.5s;
+    border: 1px solid var(--smithBlueForm);
+}
+input:focus{
+    border: 1px solid var(--smithBlueForm);
+    transition: 0.5s;
+    outline-color: var(--smithBlueForm);
+    background-color: var(--smithCyanForm);
+}
+textarea{
+    transition: 0.5s;
+    border: 1px solid var(--smithBlueForm);
+}
+textarea:focus{
+    border: 1px solid var(--smithBlueForm);
+    transition: 0.5s;
+    outline-color: var(--smithBlueForm);
+    background-color: var(--smithCyanForm);
+}
+
+section{
+    border: 1px solid var(--lightGrayLine);
+    box-shadow: 0px 0px 5px var(--lightGrayLine);
+}
+.reportDivision{
+    background-color:var(--smithBack);
+}
+.report{
+    background-color: var(--smithWhite);
+    border: 1px solid var(--lightGrayLine);
+}
+#reportSender{
+    transition: 0.3s;
+    border-radius: 10px;
+    border: 2px solid var(--smithBlueForm);
+    font-weight: 400;
+}
+#reportSender:hover{
+    transition: 0.3s;
+    border-radius: 5px;
+
+    background-color: var(--smithBlueForm);
+    color: white;
+}
+#reportSender:focus{
+    outline: none;
+    transition: 0.3s;
+    border-radius: 5px;
+
+    background-color: var(--smithBlueForm);
+    color: white;
+}
+.filterHolders{
+    display: flex;
+}
+.setFiltersButton, #reportSenderEdit{
+    transition: 0.3s;
+    border-radius: 10px;
+    border: 2px solid var(--smithBlueForm);
+    font-weight: 400;
+}
+.setFiltersButton:hover, #reportSenderEdit:hover{
+    outline: none;
+    transition: 0.3s;
+    border-radius: 5px;
+
+    background-color: var(--smithBlueForm);
+    color: white;
+}
+.deleteFilterButton, .exitEditButton, .closeSetAsForm{
+    transition: 0.3s;
+    border-radius: 10px;
+    border: 2px solid var(--blueOrangade);
+    font-weight: 400;
+
+    color: var(--blueOrangade);
+    width: 35px;
+}
+.deleteFilterButton:hover, .exitEditButton:hover, .closeSetAsForm:hover{
+    transition: 0.3s;
+    border-radius: 5px;
+    border: 2px solid var(--blueOrangade);
+    font-weight: 400;
+
+    color: white;
+    background-color: var(--blueOrangade);
+}
+.showed{
+    display: flex;
+}
+.setAsReadyForm{
+    width: 80%;
+}
+.technicianData{
+    display: flex;
+}
