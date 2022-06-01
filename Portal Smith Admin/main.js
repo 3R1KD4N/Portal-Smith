@@ -11,7 +11,8 @@ import {
     getMoreReports,
     updateReport,
     setAsReady,
-    uploadFactures
+    uploadFactures,
+    filteredReportId
 } from "./firebase.js";
 
 let showedData;
@@ -336,129 +337,129 @@ reportSender.addEventListener("click", async(e)=>{
 
         switch(reportLocation.value){
             case "TH: VPH":
-                locationZone = "Zone Zero"
+                locationZone = "Zona Cumbres"
                 break;
             case "TH: Forum Leones":
-                locationZone = "Zone Zero"
+                locationZone = "Zona Cumbres"
                 break;
             case "TH: San Jerónimo":
-                locationZone = "Zone Zero"
+                locationZone = "Zona Cumbres"
                 break;
             case "TH: UDEM CCU":
-                locationZone = "Zone Zero"
+                locationZone = "Zona Cumbres"
                 break;
 
 
             case "TH: Office Park":
-                locationZone = "Zone Altea"
+                locationZone = "Zona Apodaca"
                 break;
             case "TH: Altea Huinalá":
-                locationZone = "Zone Altea"
+                locationZone = "Zona Apodaca"
                 break;
             case "TH: Altea Miguel Alemán":
-                locationZone = "Zone Altea"
+                locationZone = "Zona Apodaca"
                 break;
             case "TH: TH: La Fe":
-                locationZone = "Zone Altea"
+                locationZone = "Zona Apodaca"
                 break;
             case "TH: Mol Concordia":
-                locationZone = "Zone Altea"
+                locationZone = "Zona Apodaca"
                 break;
 
 
             case "TH: Altea Misiones":
-                locationZone = "Zone Minus";
+                locationZone = "Zona Country/TEC";
                 break;
             case "TH: Altea Pletórico":
-                locationZone = "Zone Minus";
+                locationZone = "Zona Country/TEC";
                 break;
             case "TH: Garza Sada":
-                locationZone = "Zone Minus";
+                locationZone = "Zona Country/TEC";
                 break;
             case "TH: Micropolis":
-                locationZone = "Zone Minus";
+                locationZone = "Zona Country/TEC";
                 break;
             case "TH: Tec Biblioteca":
-                locationZone = "Zone Minus";
+                locationZone = "Zona Country/TEC";
                 break;
 
             
             case "TH: Paseo Villalta":
-                locationZone = "Zone V"
+                locationZone = "Zona V"
                 break;
             case "TH: Distrito V":
-                locationZone = "Zone V"
+                locationZone = "Zona V"
                 break;
             case "TH: Parque Centro":
-                locationZone = "Zone V"
+                locationZone = "Zona V"
                 break;
             case "TH: Carranza":
-                locationZone = "Zone V"
+                locationZone = "Zona V"
                 break;
 
             
             case "TH: Central de Autobuses":
-                locationZone = "Zone II";
+                locationZone = "Zona Cuauhtémoc";
                 break;
             case "TH: Colón Metro":
-                locationZone = "Zone II";
+                locationZone = "Zona Cuauhtémoc";
                 break;
 
 
             case "TH: Av. México":
-                locationZone = "Zone Magna";
+                locationZone = "Zona Centro";
                 break;
             case "TH: Miguel de la Madrid":
-                locationZone = "Zone Magna";
+                locationZone = "Zona Centro";
                 break;
             case "TH: Constitución":
-                locationZone = "Zone Magna";
+                locationZone = "Zona Centro";
                 break;
             case "TH: Pablo Livas":
-                locationZone = "Zone Magna";
+                locationZone = "Zona Centro";
                 break;
             case "TH: Arcadia Guadalupe":
-                locationZone = "Zone Magna";
+                locationZone = "Zona Centro";
                 break;
             case "TH: Ayutla":
-                locationZone = "Zone Magna";
+                locationZone = "Zona Centro";
                 break;
             case "TH: Chapultepec":
-                locationZone = "Zone Magna";
+                locationZone = "Zona Centro";
                 break;
 
 
             case "TH: Arboledas":
-                locationZone = "Zone Lower";
+                locationZone = "Zona Campus";
                 break;
             case "TH: Magma":
-                locationZone = "Zone Lower";
+                locationZone = "Zona Campus";
                 break;
             case "TH: Fashion Drive":
-                locationZone = "Zone Lower";
+                locationZone = "Zona Campus";
                 break;
             case "TH: Calzada del Valle":
-                locationZone = "Zone Lower";
+                locationZone = "Zona Campus";
                 break;
             case "TH: Ricardo Margain":
-                locationZone = "Zone Lower";
+                locationZone = "Zona Campus";
                 break;
 
 
             case "TH: Nogalar":
-                locationZone = "Zone Origi";
+                locationZone = "Zona Escobedo";
                 break;
             case "TH: Las Puentes":
-                locationZone = "Zone Origi";
+                locationZone = "Zona Escobedo";
                 break;
             case "TH: Nuevo Anáhuac":
-                locationZone = "Zone Origi";
+                locationZone = "Zona Escobedo";
                 break;
             case "TH: Animol":
-                locationZone = "Zone Origi";
+                locationZone = "Zona Escobedo";
                 break;
             case "TH: Sultanes":
-                locationZone = "Zone Origi";
+                locationZone = "Zona Escobedo";
                 break;
         }
 
@@ -530,6 +531,16 @@ async function requestFilter(){
         });
         await setAllDeleteButtons();
     }
+    if(filterSelection.value == "reportId"){
+        const reportIdSearch = document.getElementById("reportIdSearch");
+
+        const filteredRequest = await filteredReportId(reportIdSearch.value);
+        filteredRequest.forEach(doc => {
+            printAllData(doc);
+        });
+        
+        await setAllDeleteButtons();
+    }
 }
 
 //Delete filters function
@@ -556,8 +567,13 @@ filterSelection.addEventListener("change", (e)=>{
             <label for="filterDate">Fecha</label>
             <input id="filterDateInput" type="date">
         `;
-
-
+    }
+    if(filterSelection.value == "reportId"){
+        filterContainer.innerHTML = 
+        `
+            <label for="reportIdSearch">Fecha</label>
+            <input id="reportIdSearch" type="text" maxlength="8" placeholder="R-XXXXXX">
+        `;
     }
     if(filterSelection.value == "location"){
         filterContainer.innerHTML = 
@@ -613,14 +629,14 @@ filterSelection.addEventListener("change", (e)=>{
         `
         <label for="filterZoneSelect">Fecha</label>
             <select name="filterZoneSelect" id="filterZoneSelector">
-                <option value="Zone Zero">Zone Zero</option>
-                <option value="Zone Altea">Zone Altea</option>
-                <option value="Zone Minus">Zone Minus</option>
-                <option value="Zone V">Zone V</option>
-                <option value="Zone II">Zone II</option>
-                <option value="Zone Magna">Zone Magna</option>
-                <option value="Zone Lower">Zone Lower</option>
-                <option value="Zone Origi">Zone Origi</option>
+                <option value="Zona Cumbres">Zona Cumbres</option>
+                <option value="Zona Apodaca">Zona Apodaca</option>
+                <option value="Zona Country/TEC">Zona Country/TEC</option>
+                <option value="Zona V">Zona V</option>
+                <option value="Zona Cuauhtémoc">Zona Cuauhtémoc</option>
+                <option value="Zona Centro">Zona Centro</option>
+                <option value="Zona Campus">Zona Campus</option>
+                <option value="Zona Escobedo">Zona Escobedo</option>
             </select>
         `;
     }
