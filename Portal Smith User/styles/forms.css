@@ -128,3 +128,6 @@ section{
 .technicianData{
     display: flex;
 }
+#locationFilter{
+    width: 100%;
+}

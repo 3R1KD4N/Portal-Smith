@@ -11,7 +11,8 @@ import {
     getMoreReports,
     updateReport,
     setAsReady,
-    uploadFactures
+    uploadFactures,
+    filteredReportsStatus
 } from "./firebase.js";
 
 let showedData;
@@ -361,6 +362,16 @@ async function requestFilter(){
         });
         await setAllDeleteButtons();
     }
+    if(filterSelection.value == "status"){
+        const statusSelector = document.getElementById("statusSelector");
+
+        console.log(statusSelector.value); 
+        const filteredRequest = await filteredReportsStatus(statusSelector.value);
+        filteredRequest.forEach(doc => {
+            printAllData(doc);
+        });
+        await setAllDeleteButtons();
+    }
 }
 
 //Delete filters function
@@ -387,8 +398,13 @@ filterSelection.addEventListener("change", (e)=>{
             <label for="filterDate">Fecha</label>
             <input id="filterDateInput" type="date">
         `;
-
-
+    }
+    if(filterSelection.value == "reportId"){
+        filterContainer.innerHTML = 
+        `
+            <label for="reportIdSearch">Fecha</label>
+            <input id="reportIdSearch" type="text" maxlength="8" placeholder="R-XXXXXX">
+        `;
     }
     if(filterSelection.value == "location"){
         filterContainer.innerHTML = 
@@ -444,14 +460,14 @@ filterSelection.addEventListener("change", (e)=>{
         `
         <label for="filterZoneSelect">Fecha</label>
             <select name="filterZoneSelect" id="filterZoneSelector">
-                <option value="Zone Zero">Zone Zero</option>
-                <option value="Zone Altea">Zone Altea</option>
-                <option value="Zone Minus">Zone Minus</option>
-                <option value="Zone V">Zone V</option>
-                <option value="Zone II">Zone II</option>
-                <option value="Zone Magna">Zone Magna</option>
-                <option value="Zone Lower">Zone Lower</option>
-                <option value="Zone Origi">Zone Origi</option>
+                <option value="Zona Cumbres">Zona Cumbres</option>
+                <option value="Zona Apodaca">Zona Apodaca</option>
+                <option value="Zona Country/TEC">Zona Country/TEC</option>
+                <option value="Zona V">Zona V</option>
+                <option value="Zona Cuauhtémoc">Zona Cuauhtémoc</option>
+                <option value="Zona Centro">Zona Centro</option>
+                <option value="Zona Campus">Zona Campus</option>
+                <option value="Zona Escobedo">Zona Escobedo</option>
             </select>
         `;
     }
@@ -473,6 +489,17 @@ filterSelection.addEventListener("change", (e)=>{
                 <option value="diciembre">Diciembre</option>
             </select>
         `;
+    }
+    if(filterSelection.value == "status"){
+        filterContainer.innerHTML = `
+        <label for="statusSelector">Estado: </label>
+        <select name="statusSelector" id="statusSelector">
+            <option value="0 Pendiente">Pendiente</option>
+            <option value="1 Revisado">Revisado</option>
+            <option value="2 Listo">Listo</option>
+            <option value="3 Facturado">Facturado</option>
+        </select>
+    `;
     }
 });
 

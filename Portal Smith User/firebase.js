@@ -101,6 +101,14 @@ export const filteredReportZone = async(filterZone)=>{
     const filteredData = await getDocs(filteredRequest);
     return filteredData;
 }
+//Get filtered by status
+export const filteredReportsStatus = async(statusFilter)=>{
+    const collectionData = collection(db, "reports");
+    const filteredRequest = query(collectionData, where("status", "==", statusFilter), orderBy("date", "asc"), limit(50));
+
+    const filteredData = await getDocs(filteredRequest);
+    return filteredData;
+}
 //Get report to edit
 export const getReportToEdit = async (id)=> getDoc(doc (db, "reports", id));
 
