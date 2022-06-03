@@ -238,7 +238,7 @@ button{
     align-items: center;
 }
 .filterContainer{
-    padding: 0 5px 0 15px;
+    padding: 0 15px 0 5px;
 }
 
 
@@ -459,4 +459,7 @@ main{
 }
 .technicianData{
     display: flex;
+}
+.mainTitleHeader{
+    padding-top: 10px;
 }
