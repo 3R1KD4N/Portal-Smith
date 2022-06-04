@@ -58,4 +58,10 @@
     .technicianData{
         display: flex;
     }
+    .reportMainData > h4{
+        border: 1px solid var(--smithBlue);
+    }
+    .reportMainData{
+        width: 85%;
+    }
 }

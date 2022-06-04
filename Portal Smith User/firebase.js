@@ -88,7 +88,7 @@ export const filteredReportsTech = async (filterTech)=>{
 //Get filtered report by month
 export const filteredReportMonth = async (filterMonth)=>{
     const collectionData = collection(db, "reports");
-    const filteredRequest = query(collectionData, where("month", "==", filterMonth), orderBy("status", "asc"), limit(100));
+    const filteredRequest = query(collectionData, where("month", "==", filterMonth), orderBy("date", "asc"), limit(100));
 
     const filteredData = await getDocs(filteredRequest);
     return filteredData;
@@ -97,6 +97,14 @@ export const filteredReportMonth = async (filterMonth)=>{
 export const filteredReportZone = async(filterZone)=>{
     const collectionData = collection(db, "reports");
     const filteredRequest = query(collectionData, where("zone", "==", filterZone), orderBy("status", "asc"), limit(100));
+
+    const filteredData = await getDocs(filteredRequest);
+    return filteredData;
+}
+//Get filtered by status
+export const filteredReportsStatus = async(statusFilter)=>{
+    const collectionData = collection(db, "reports");
+    const filteredRequest = query(collectionData, where("status", "==", statusFilter), orderBy("date", "asc"), limit(50));
 
     const filteredData = await getDocs(filteredRequest);
     return filteredData;
@@ -150,4 +158,28 @@ export const uploadFactures = async(pdf, xml)=>{
     const reportId = setAsFacturedFormHolder.id;
 
     await updateDoc(doc(db, "reports", reportId), {"status": "3 Facturado", "XML": downloadXML, "PDF": downloadPDF});
+}
+
+export const uploadEvidences = async(img, fileName, format)=>{
+    const evidenceReference = ref(storage, "evidences/"+fileName+format);
+    await uploadBytes(evidenceReference, img);
+
+    const downloadPhoto = await getDownloadURL(evidenceReference);
+    return downloadPhoto;
+}
+
+export const uploadEvidencesPhotos = async(imgs, id)=>{
+    let filesIndex = imgs.length;
+    let urlsArray = [];
+
+    while(filesIndex > 0){
+        const fileName = id+"-photo"+filesIndex;
+        const format = "."+imgs[filesIndex-1].name.split(".")[1];
+        const img = imgs[filesIndex];
+ 
+        const urlResponse = await uploadEvidences(img, fileName, format);
+        urlsArray.push(urlResponse);
+        filesIndex--;
+    }
+    await updateDoc(doc(db, "reports", id), {"evidences": urlsArray});
 }

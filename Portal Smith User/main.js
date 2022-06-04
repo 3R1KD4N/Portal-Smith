@@ -11,7 +11,8 @@ import {
     getMoreReports,
     updateReport,
     setAsReady,
-    uploadFactures
+    uploadFactures,
+    filteredReportsStatus
 } from "./firebase.js";
 
 let showedData;
@@ -141,24 +142,28 @@ function setAllDeleteButtons(){
 
             reportDateEdit.textContent = reportData.data().date;
             reportIdEdit.value = reportData.data().id;
-        })
-
+        });
         exitFacturedButton.addEventListener("click", ()=>{
             setAsFacturedFormHolder.className = "setAsFacturedFormHolder notShowed";
         });
     });
 
     const readyButtons = document.querySelectorAll(".readyButton");
-    readyButtons.forEach((e)=>{
+    readyButtons.forEach( async(e)=>{
         const setAsReadyFormHolder = document.querySelector(".setAsReadyFormHolder");
         const closeSetAsForm = document.querySelector(".closeSetAsForm");
-        
-        e.addEventListener("click", ()=>{
-            console.log(e.id);
+        const setAsComentary = document.getElementById("setAsComentary");
+
+        e.addEventListener("click", async()=>{
+            const reportData = await getReportToEdit(e.id);
+            if(reportData.data().comentary == undefined){
+                setAsComentary.value = "";
+            }else{
+                setAsComentary.value = reportData.data().comentary;
+            }
             const setAsButtonSender = document.querySelector(".setAsButtonSender").id = e.id;
             setAsReadyFormHolder.style.display = "flex";
         })
-
     })
 
     reportEditButtons.forEach((e)=>{
@@ -185,6 +190,21 @@ function setAllDeleteButtons(){
             reportAuth.value = report.data().auth;
         });
     });
+
+    const openButton = document.querySelectorAll(".openButton");
+    const closedDescription = document.querySelectorAll(".closedDescription");
+
+    openButton.forEach((e)=>{
+        e.addEventListener("click", ()=>{
+            closedDescription.forEach((item)=>{
+                if(item.id == e.id){
+                    item.className = "reportDescription openDescription";
+                }else{
+                    item.className = "reportDescription closedDescription";
+                }
+            })
+        });
+    });
 }
 
 //Print all the data
@@ -195,18 +215,18 @@ function printAllData(doc){
         reportHolder.innerHTML = reportHolder.innerHTML + 
         `
             <div class="report">
-                <div class="reportMainData">
-                    <h4>`+doc.data().location+`</h4>
-                    <h4>`+doc.data().equipment+`</h4>
-                    <h4>`+doc.data().id+`</h4>
-                    <h4>`+doc.data().date+`</h4>
+                <div class="mainDataHolder">
+                    <div class="reportMainData">
+                        <h4>`+doc.data().location+`</h4>
+                        <h4>`+doc.data().equipment+`</h4>
+                        <h4>`+doc.data().id+`</h4>
+                        <h4>`+doc.data().date+`</h4>
+                    </div>
+                    <button class="openButton" id="`+doc.id+`">↓</button>
                 </div>
             <div class="divisionBar"></div>
-            <div class="reportDescription">
+            <div class="reportDescription closedDescription" id="`+doc.id+`">
                 <p>`+doc.data().description+`</p>
-                <br>
-                <p>Tecnico: `+doc.data().technician+`</p>
-                <p>Firmado por: `+doc.data().auth+`</p>
             </div>
             <div class="reportsButtons">
                 <h4 class="reportTextStatus Pendiente">Estado: `+doc.data().status.toString().slice(2)+`</h4>
@@ -221,16 +241,22 @@ function printAllData(doc){
         reportHolder.innerHTML = reportHolder.innerHTML + 
         `
             <div class="report">
-                <div class="reportMainData">
-                    <h4>`+doc.data().location+`</h4>
-                    <h4>`+doc.data().equipment+`</h4>
-                    <h4>`+doc.data().id+`</h4>
-                    <h4>`+doc.data().date+`</h4>
+                <div class="mainDataHolder">
+                    <div class="reportMainData">
+                        <h4>`+doc.data().location+`</h4>
+                        <h4>`+doc.data().equipment+`</h4>
+                        <h4>`+doc.data().id+`</h4>
+                        <h4>`+doc.data().date+`</h4>
+                    </div>
+                    <button class="openButton" id="`+doc.id+`">↓</button>
                 </div>
             <div class="divisionBar"></div>
-            <div class="reportDescription">
+            <div class="reportDescription closedDescription" id="`+doc.id+`">
                 <p>`+doc.data().description+`</p>
                 <br>
+                <div class="comentaryHolder">
+                    <p>Comentarios: `+doc.data().comentary+`</p>
+                </div>
                 <p>Tecnico: `+doc.data().technician+`</p>
                 <p>Firmado por: `+doc.data().auth+`</p>
             </div>
@@ -247,14 +273,17 @@ function printAllData(doc){
         reportHolder.innerHTML = reportHolder.innerHTML + 
         `
             <div class="report">
+            <div class="mainDataHolder">
                 <div class="reportMainData">
                     <h4>`+doc.data().location+`</h4>
                     <h4>`+doc.data().equipment+`</h4>
                     <h4>`+doc.data().id+`</h4>
                     <h4>`+doc.data().date+`</h4>
                 </div>
+                <button class="openButton" id="`+doc.id+`">↓</button>
+            </div>
             <div class="divisionBar"></div>
-            <div class="reportDescription">
+            <div class="reportDescription closedDescription" id="`+doc.id+`">
                 <p>`+doc.data().description+`</p>
                 <br>
                 <p>Tecnico: `+doc.data().technician+`</p>
@@ -273,14 +302,17 @@ function printAllData(doc){
         reportHolder.innerHTML = reportHolder.innerHTML + 
         `
             <div class="report">
-                <div class="reportMainData">
-                    <h4>`+doc.data().location+`</h4>
-                    <h4>`+doc.data().equipment+`</h4>
-                    <h4>`+doc.data().id+`</h4>
-                    <h4>`+doc.data().date+`</h4>
+                <div class="mainDataHolder">
+                    <div class="reportMainData">
+                        <h4>`+doc.data().location+`</h4>
+                        <h4>`+doc.data().equipment+`</h4>
+                        <h4>`+doc.data().id+`</h4>
+                        <h4>`+doc.data().date+`</h4>
                 </div>
+                <button class="openButton" id="`+doc.id+`">↓</button>
+            </div>
             <div class="divisionBar"></div>
-            <div class="reportDescription">
+            <div class="reportDescription closedDescription" id="`+doc.id+`">
                 <p>`+doc.data().description+`</p>
                 <br>
                 <p>Tecnico: `+doc.data().technician+`</p>
@@ -361,6 +393,16 @@ async function requestFilter(){
         });
         await setAllDeleteButtons();
     }
+    if(filterSelection.value == "status"){
+        const statusSelector = document.getElementById("statusSelector");
+
+        console.log(statusSelector.value); 
+        const filteredRequest = await filteredReportsStatus(statusSelector.value);
+        filteredRequest.forEach(doc => {
+            printAllData(doc);
+        });
+        await setAllDeleteButtons();
+    }
 }
 
 //Delete filters function
@@ -387,8 +429,13 @@ filterSelection.addEventListener("change", (e)=>{
             <label for="filterDate">Fecha</label>
             <input id="filterDateInput" type="date">
         `;
-
-
+    }
+    if(filterSelection.value == "reportId"){
+        filterContainer.innerHTML = 
+        `
+            <label for="reportIdSearch">Fecha</label>
+            <input id="reportIdSearch" type="text" maxlength="8" placeholder="R-XXXXXX">
+        `;
     }
     if(filterSelection.value == "location"){
         filterContainer.innerHTML = 
@@ -397,6 +444,7 @@ filterSelection.addEventListener("change", (e)=>{
             <select name="reportLocation" id="locationFilter">
                 <option value="TH: Fashion Drive">TH: Fashion Drive</option>
                 <option value="TH: Arboledas">TH: Arboledas</option>
+                <option value="TH: VPH">TH: VPH</option>
                 <option value="TH: UDEM CCU">TH: UDEM CCU</option>
                 <option value="TH: La Fe">TH: La Fe</option>
                 <option value="TH: Magma">TH: Magma</option>
@@ -406,17 +454,17 @@ filterSelection.addEventListener("change", (e)=>{
                 <option value="TH: Las Puentes">TH: Las Puentes</option>
                 <option value="TH: Micropolis">TH: Micropolis</option>
                 <option value="TH: Parque Centro">TH: Parque Centro</option>
-                <option value="TH: Altea Miguel Alemán">TH: Altea Miguel Alemán</option>
-                <option value="TH: Altea Huinalá">TH: Altea Huinalá</option>
+                <option value="TH: A. Miguel Alemán">TH: A. Miguel Alemán</option>
+                <option value="TH: A. Huinalá">TH: A. Huinalá</option>
                 <option value="TH: Distrito V">TH: Distrito V</option>
-                <option value="TH: Altea Pletórico">TH: Altea Pletórico</option>
+                <option value="TH: A. Pletórico">TH: A. Pletórico</option>
                 <option value="TH: Mol Concordia">TH: Mol Concordia</option>
                 <option value="TH: Chapultepec">TH: Chapultepec</option>
                 <option value="TH: Arcadia Guadalupe">TH: Arcadia Guadalupe</option>
                 <option value="TH: Garza Sada">TH: Garza Sada</option>
                 <option value="TH: Nuevo Anáhuac">TH: Nuevo Anáhuac</option>
                 <option value="TH: Colón Metro">TH: Colón Metro</option>
-                <option value="TH: VPH">TH: VPH</option>
+                <option value="TH: Animol">TH: Animol</option>
                 <option value="TH: Tec Biblioteca">TH: Tec Biblioteca</option>
                 <option value="TH: San Jerónimo">TH: San Jerónimo</option>
                 <option value="TH: Nuevo Sur">TH: Nuevo Sur</option>
@@ -424,18 +472,17 @@ filterSelection.addEventListener("change", (e)=>{
                 <option value="TH: Punto Poniente">TH: Punto Poniente</option>
                 <option value="TH: Carranza">TH: Carranza</option>
                 <option value="TH: Constitución">TH: Constitución</option>
-                <option value="TH: Miguel de la Madrid">TH: Miguel de la Madrid</option>
+                <option value="TH: Miguel de la M.">TH: Miguel de la M.</option>
                 <option value="TH: Ayutla">TH: Ayutla</option>
                 <option value="TH: Venustiano Sur">TH: Venustiano Sur</option>
                 <option value="TH: Nogalar">TH: Nogalar</option>
                 <option value="TH: Paseo Villalta">TH: Paseo Villalta</option>
                 <option value="TH: Pablo Livas">TH: Pablo Livas</option>
                 <option value="TH: Ricardo Margain">TH: Ricardo Margain</option>
-                <option value="TH: Central de Autobuses">TH: Central de Autobuses</option>
-                <option value="TH: Calzada del Valle">TH: Calzada del Valle</option>
+                <option value="TH: C. de Autobuses">TH: C. de Autobuses</option>
+                <option value="TH: Calzada del V.">TH: Calzada del V.</option>
                 <option value="TH: Forum Leones">TH: Forum Leones</option>
                 <option value="TH: Sultanes">TH: Sultanes</option>
-                <option value="TH: Animol">TH: Animol</option>
             </select>
         `;
     }
@@ -444,14 +491,14 @@ filterSelection.addEventListener("change", (e)=>{
         `
         <label for="filterZoneSelect">Fecha</label>
             <select name="filterZoneSelect" id="filterZoneSelector">
-                <option value="Zone Zero">Zone Zero</option>
-                <option value="Zone Altea">Zone Altea</option>
-                <option value="Zone Minus">Zone Minus</option>
-                <option value="Zone V">Zone V</option>
-                <option value="Zone II">Zone II</option>
-                <option value="Zone Magna">Zone Magna</option>
-                <option value="Zone Lower">Zone Lower</option>
-                <option value="Zone Origi">Zone Origi</option>
+                <option value="Zona Cumbres">Zona Cumbres</option>
+                <option value="Zona Apodaca">Zona Apodaca</option>
+                <option value="Zona Country/TEC">Zona Country/TEC</option>
+                <option value="Zona V">Zona V</option>
+                <option value="Zona Cuauhtémoc">Zona Cuauhtémoc</option>
+                <option value="Zona Centro">Zona Centro</option>
+                <option value="Zona Campus">Zona Campus</option>
+                <option value="Zona Escobedo">Zona Escobedo</option>
             </select>
         `;
     }
@@ -473,6 +520,17 @@ filterSelection.addEventListener("change", (e)=>{
                 <option value="diciembre">Diciembre</option>
             </select>
         `;
+    }
+    if(filterSelection.value == "status"){
+        filterContainer.innerHTML = `
+        <label for="statusSelector">Estado: </label>
+        <select name="statusSelector" id="statusSelector">
+            <option value="0 Pendiente">Pendiente</option>
+            <option value="1 Revisado">Revisado</option>
+            <option value="2 Listo">Listo</option>
+            <option value="3 Facturado">Facturado</option>
+        </select>
+    `;
     }
 });
 
@@ -557,4 +615,3 @@ setAsFactureSender.addEventListener("click", async(e)=>{
         await location.reload();
     }
 });
-

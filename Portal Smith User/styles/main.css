@@ -238,7 +238,7 @@ button{
     align-items: center;
 }
 .filterContainer{
-    padding: 0 5px 0 15px;
+    padding: 0 15px 0 5px;
 }
 
 
@@ -459,4 +459,44 @@ main{
 }
 .technicianData{
     display: flex;
+}
+.mainTitleHeader{
+    padding-top: 10px;
+}
+.mainDataHolder{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.filterContainer{
+    display: flex;
+    align-items: center;
+}
+.closedDescription{
+    transition: 0.5s;
+    height: 0px;
+    opacity: 0;
+    display: none;
+}
+.openDescription{
+    transition: 0.5s;
+    height: auto;
+    opacity: 100;
+    display: block;
+}
+.openButton{
+    transition: 0.5s all;
+    background-color: var(--lightBlue);
+    border-radius: 10px;
+    border: 2px solid var(--smithBlue);
+    width: 35px;
+
+    color: black;   
+}
+.openButton:hover{
+    background-color: var(--smithBlue);
+    border-radius: 5px;
+    border: 2px solid var(--smithBlue);
+    width: 35px;
 }
